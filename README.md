@@ -1,29 +1,27 @@
 ## scribbler
 
-Scrobble a text file of tracks to Last.fm.
+Quick and dirty scrobbling to the last.fm API. For those moments where you can't scrobble right from your player but don't want to not have the tracks show up in your history.
 
 #### Getting started
 
 1. [Register](http://www.lastfm.de/api/account/create) for the Last.fm API and create an application.
 
-1. Save your API key and secret to a file called `secrets.txt`
-```
-api_key
-api_secret
-```
+2. Install `requests` through pip
+    ```sh
+    $ pip install requests
+    ```
 
-1. Install `requests` through pip
-```sh
-$ pip install requests
-```
+3. Use scribbler
 
-1. Create a file called `scrobble.txt` and fill it with the songs to scrobble.
-```
-We Can Make The World Stop - The Glitch Mob
-Radioactive - Imagine Dragons
-```
+    ```python
+    from scribbler import *
 
-1. Run scribbler
-```
-./scribbler.py
-```
+    scribbler = Scribbler(api_key, api_secret)
+    scribbler.authenticate()
+    # Calling authenticate() will prompt you for a URL to visit
+
+    timestamp = int(time.time())
+    scribbler.scrobble(timestamp, 'The Glitch Mob', 'We Can Make The World Stop')
+    ```
+
+Or use `run.py` for a quick and dirty way of scrobbling a text file of tracks. Be sure to include your api_key and api_secret in a file called `secrets.txt`.
